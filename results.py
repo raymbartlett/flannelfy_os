@@ -1,13 +1,6 @@
 """Various helper functions dealing with user results."""
 
 
-def alphabetical(albums):
-    """Sort albums alphabetically."""
-    output = albums.copy()
-    output.sort(key=lambda x: x[0].split(': ')[1])
-    return output
-
-
 def by_score(albums):
     """Sort albums by score (descending)."""
     temp = []
@@ -18,18 +11,42 @@ def by_score(albums):
 
     temp.sort(key=lambda x: (-x[1], x[0].split(' - ')[0], x[0].split(' - ')[1]))
     for i in temp:
-        output.append([(str(i[1]) + '/10: ' + i[0]), i[2]])
+        output.append([(str(i[1]) + '/10: ' + i[0].lower()), i[2]])
+    return output
 
+
+def by_artist(albums):
+    """Sort albums alphabetically by artist."""
+    output = albums.copy()
+    output.sort(key=lambda x: x[0].split(': ')[1])
     return output
 
 
 def get_unscored_albums(albums):
-    """Sort unscored albums alphabetically."""
+    """Sort unscored albums alphabetically by artist."""
     output = []
     for i in albums:
         if i[1] < 0:
-            output.append([i[0], i[2]])
+            output.append([i[0].lower(), i[2]])
     output.sort(key=lambda x: (x[0].split(' - ')[0], x[0].split(' - ')[1]))
+    return output
+
+
+def all_by_score(albums):
+    """Sort all albums by score."""
+    temp = sorted(albums.items(), key=lambda x: (-x[1], x[0]))
+    output = []
+    for i in temp:
+        output.append([str(i[1]) + '/10: ' + i[0]])
+    return output
+
+
+def all_by_artist(albums):
+    """Sort all albums by artist."""
+    temp = sorted(albums.items(), key=lambda x: (x[0], -x[1]))
+    output = []
+    for i in temp:
+        output.append([str(i[1]) + '/10: ' + i[0]])
     return output
 
 

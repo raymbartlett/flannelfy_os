@@ -5,7 +5,7 @@ import requests
 import base64
 
 from fantano import Fantano
-from results import alphabetical
+from results import by_artist
 from results import by_score
 from results import get_unscored_albums
 from results import get_score_data
@@ -13,13 +13,20 @@ from results import get_average
 from results import get_score_path
 from insta_card import generate_card
 
+# scores for all scores tab
+from scores_classics import titles_classics
+from scores_2010s import titles_2010s
+from scores_2020s import titles_2020s
+from results import all_by_score
+from results import all_by_artist
+
 
 app = Flask(__name__)
 
 
 s = requests.session()
-clientID = ""
-clientSecret = ""
+clientID = "a0b8bc2c739b4e07af6080987ec92b42"
+clientSecret = "54cdba3c561b4db1b0cdeaa663034e97"
 
 
 @app.route("/")  # Home page and button for logging into Spotify
@@ -47,7 +54,7 @@ def home(token):
     general = str(user.total_albums) + ' albums in total | ' + str(len(user.eligible_albums)) + ' albums are eligible | ' + str(len(user.scored_albums)) + ' albums with a score'
 
     ordered_scores = by_score(user.scored_albums)
-    alphabetical_scores = alphabetical(ordered_scores)
+    alphabetical_scores = by_artist(ordered_scores)
     unscored = get_unscored_albums(user.eligible_albums)
 
     score_data = get_score_data(user.scored_albums)
@@ -57,7 +64,36 @@ def home(token):
     score_path = get_score_path(average)
 
     encoded_img_data = generate_card(score_path, labels, values, general, average)
-    return render_template("home.html", general=general, ordered_scores=ordered_scores, alphabetical_scores=alphabetical_scores, unscored=unscored, labels=labels, values=values, average=average, score_path=score_path, img_data=encoded_img_data.decode('utf-8'))
+    return render_template("home.html", 
+        general=general,
+        ordered_scores=ordered_scores,
+        alphabetical_scores=alphabetical_scores,
+        unscored=unscored,
+        labels=labels,
+        values=values,
+        average=average,
+        score_path=score_path,
+        img_data=encoded_img_data.decode('utf-8')
+    )
+
+
+@app.route("/all")
+def all_scores():
+    all_scores = {**titles_classics, **titles_2010s, **titles_2020s}
+    num_scores = len(all_scores)
+    average = sum(all_scores.values())/len(all_scores)
+    score_path = get_score_path(average)
+
+    by_score = all_by_score(all_scores)
+    by_artist = all_by_artist(all_scores)
+    return render_template(
+        "all_scores.html",
+        num_scores=num_scores,
+        average=average,
+        score_path=score_path,
+        by_score=by_score,
+        by_artist=by_artist
+    )
 
 
 @app.route("/access")
