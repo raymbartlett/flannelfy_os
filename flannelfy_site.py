@@ -9,8 +9,8 @@ from results import by_artist
 from results import by_score
 from results import get_unscored_albums
 from results import get_score_data
-from results import get_average
 from results import get_score_path
+from results import get_average
 from insta_card import generate_card
 
 # scores for all scores tab
@@ -19,14 +19,15 @@ from scores_2010s import titles_2010s
 from scores_2020s import titles_2020s
 from results import all_by_score
 from results import all_by_artist
+from results import get_all_score_data
 
 
 app = Flask(__name__)
 
 
 s = requests.session()
-clientID = "a0b8bc2c739b4e07af6080987ec92b42"
-clientSecret = "54cdba3c561b4db1b0cdeaa663034e97"
+clientID = ""
+clientSecret = ""
 
 
 @app.route("/")  # Home page and button for logging into Spotify
@@ -58,8 +59,8 @@ def home(token):
     unscored = get_unscored_albums(user.eligible_albums)
 
     score_data = get_score_data(user.scored_albums)
-    labels = [row[0] for row in score_data]
-    values = [row[1] for row in score_data]
+    labels = list(score_data.keys())
+    values = list(score_data.values())
     average = get_average(score_data)
     score_path = get_score_path(average)
 
@@ -81,16 +82,23 @@ def home(token):
 def all_scores():
     all_scores = {**titles_classics, **titles_2010s, **titles_2020s}
     num_scores = len(all_scores)
-    average = sum(all_scores.values())/len(all_scores)
+    average = round((sum(all_scores.values())/len(all_scores)), 2)
     score_path = get_score_path(average)
 
     by_score = all_by_score(all_scores)
     by_artist = all_by_artist(all_scores)
+
+    score_data = get_all_score_data(all_scores)
+    labels = list(score_data.keys())
+    values = list(score_data.values())
+
     return render_template(
         "all_scores.html",
         num_scores=num_scores,
         average=average,
         score_path=score_path,
+        labels=labels,
+        values=values,
         by_score=by_score,
         by_artist=by_artist
     )

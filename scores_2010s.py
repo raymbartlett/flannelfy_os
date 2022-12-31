@@ -1986,7 +1986,6 @@ titles_2010s = {
     "dance gavin dance - instant gratification": 1,
     "chance the rapper - the big day": 0,
     "kid cudi - speedin' bullet 2 heaven": 0,
-    # EVERYTHING BELOW ADDED MANUALLY
 
     # 2020s EXCEPTION (contains double quotes)
     'westside gunn - peace "fly" god': 5,
@@ -2003,7 +2002,7 @@ titles_2010s = {
     "moses sumney - græ": 7,  # part 1 supposed to be there?
     # TYPO
     "jid - dicaprio 2": 8,
-    "rapsody - laila’s wisdom": 8,  # the other one has a weird apostrophe?
+    "rapsody - laila’s wisdom": 8,  # different apostrophe
     "haru nemuri - harutosyura": 8,
     "car seat headrest - twin fantasy": 8,
     "kyary pamyu pamyu - なんだこれくしょん": 8,

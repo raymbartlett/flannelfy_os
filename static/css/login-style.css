@@ -41,6 +41,17 @@ h2 {
     margin-bottom: 7vw;
 }
 
+h3 {
+    font-family: 'League Gothic', sans-serif;
+    letter-spacing: .5px;
+    font-size: 3vw;
+    font-weight: 300;
+    line-height: 0;
+    color: #f1ef80;
+    text-shadow: -.1vw -.1vw 0 #000, .1vw -.1vw 0 #000, -.1vw .1vw 0 #000, .1vw .1vw 0 #000;
+    text-align: center;
+}
+
 button {
     font-family: 'League Gothic', sans-serif;
     font-size: 5vw;

@@ -52,91 +52,107 @@ def all_by_artist(albums):
 
 def get_score_data(albums):
     """Return data for bar chart of scores distribution."""
-    num_10s = 0
-    num_9s = 0
-    num_8s = 0
-    num_7s = 0
-    num_6s = 0
-    num_5s = 0
-    num_4s = 0
-    num_3s = 0
-    num_2s = 0
-    num_1s = 0
-    num_0s = 0
-    all_scores = 0
+    data = {
+        "10s": 0,
+        "9s": 0,
+        "8s": 0,
+        "7s": 0,
+        "6s": 0,
+        "5s": 0,
+        "4s": 0,
+        "3s": 0,
+        "2s": 0,
+        "1s": 0,
+        "0s": 0,
+    }
 
     for i in albums:
-        all_scores += albums[i][0]
         if albums[i][0] == 10:
-            num_10s += 1
+            data["10s"] += 1
         elif albums[i][0] == 9:
-            num_9s += 1
+            data["9s"] += 1
         elif albums[i][0] == 8:
-            num_8s += 1
+            data["8s"] += 1
         elif albums[i][0] == 7:
-            num_7s += 1
+            data["7s"] += 1
         elif albums[i][0] == 6:
-            num_6s += 1
+            data["6s"] += 1
         elif albums[i][0] == 5:
-            num_5s += 1
+            data["5s"] += 1
         elif albums[i][0] == 4:
-            num_4s += 1
+            data["4s"] += 1
         elif albums[i][0] == 3:
-            num_3s += 1
+            data["3s"] += 1
         elif albums[i][0] == 2:
-            num_2s += 1
+            data["2s"] += 1
         elif albums[i][0] == 1:
-            num_1s += 1
+            data["1s"] += 1
         elif albums[i][0] == 0:
-            num_0s += 1
+            data["0s"] += 1
 
-    data = [
-        ("10s", num_10s),
-        ("9s", num_9s),
-        ("8s", num_8s),
-        ("7s", num_7s),
-        ("6s", num_6s),
-        ("5s", num_5s),
-        ("4s", num_4s),
-        ("3s", num_3s),
-        ("2s", num_2s),
-        ("1s", num_1s),
-        ("0s", num_0s),
-    ]
+    return data
+
+
+def get_all_score_data(albums):
+    """Return data for bar chart of scores distribution."""
+    data = {
+        "10s": 0,
+        "9s": 0,
+        "8s": 0,
+        "7s": 0,
+        "6s": 0,
+        "5s": 0,
+        "4s": 0,
+        "3s": 0,
+        "2s": 0,
+        "1s": 0,
+        "0s": 0,
+    }
+    for value in albums.values():
+        if value == 10:
+            data["10s"] += 1
+        elif value == 9:
+            data["9s"] += 1
+        elif value == 8:
+            data["8s"] += 1
+        elif value == 7:
+            data["7s"] += 1
+        elif value == 6:
+            data["6s"] += 1
+        elif value == 5:
+            data["5s"] += 1
+        elif value == 4:
+            data["4s"] += 1
+        elif value == 3:
+            data["3s"] += 1
+        elif value == 2:
+            data["2s"] += 1
+        elif value == 1:
+            data["1s"] += 1
+        elif value == 0:
+            data["0s"] += 1
 
     return data
 
 
 def get_average(score_data):
-    """Return the user's average score."""
-    sum = 0
-    amount = 0
-    for i in score_data:
-        amount += i[1]
-        if i[0] == "10s":
-            sum += (i[1] * 10)
-        elif i[0] == "9s":
-            sum += (i[1] * 9)
-        elif i[0] == "8s":
-            sum += (i[1] * 8)
-        elif i[0] == "7s":
-            sum += (i[1] * 7)
-        elif i[0] == "6s":
-            sum += (i[1] * 6)
-        elif i[0] == "5s":
-            sum += (i[1] * 5)
-        elif i[0] == "4s":
-            sum += (i[1] * 4)
-        elif i[0] == "3s":
-            sum += (i[1] * 3)
-        elif i[0] == "2s":
-            sum += (i[1] * 2)
-        elif i[0] == "1s":
-            sum += (i[1] * 1)
-        elif i[0] == "0s":
-            sum += (i[1] * 0)
+    sum = score_data["10s"] * 10
+    sum += score_data["9s"] * 9
+    sum += score_data["8s"] * 8
+    sum += score_data["7s"] * 7
+    sum += score_data["6s"] * 6
+    sum += score_data["5s"] * 5
+    sum += score_data["4s"] * 4
+    sum += score_data["3s"] * 3
+    sum += score_data["2s"] * 2
+    sum += score_data["1s"] * 1
+    sum += score_data["0s"] * 0
 
-    return round((sum / amount), 2)
+    total = 0
+    for value in score_data.values():
+        total += value
+
+    return round((sum / total), 2)
 
 
 def get_score_path(average):
@@ -213,3 +229,4 @@ def get_score_path(average):
 
     elif 10 <= average:
         return '10.png'
+

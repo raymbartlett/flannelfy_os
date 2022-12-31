@@ -22,10 +22,6 @@
                 <h2>average score: {{ average }}</h2>
             </div>
 
-            <div class="scorepng">
-                <img src="/static/scores/{{ score_path }}" alt="Image representing user's average score in style of TND videos"/>
-            </div>
-
             <div class="barchart">
                 <canvas id="barChart" width="400" height="400"></canvas>
                 <script>
@@ -74,43 +70,27 @@
                 </script>
             </div>
 
-            <button data-toggle="modal" data-target="#card">share results</button>
-
-            <div id="card" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <img class="img-responsive" style='display:block; height:100%;' id='card' src='data:image/jpeg;base64, {{ img_data }}' alt="Score card for social media"/>
-                    </div>
-                </div>
-            </div>
-
             <ul id="results" class="nav nav-tabs nav-justified">
                 <li class="nav-item active"><a href="#score" class="nav-link" data-toggle="tab"><h2>by score</h2></a></li>
                 <li class="nav-item"><a href="#artist" class="nav-link" data-toggle="tab"><h2>by artist</h2></a></li>
-                <li class="nav-item"><a href="#unscored" class="nav-link" data-toggle="tab"><h2>unscored</h2></a></li>
             </ul>
 
             <div class="tab-content">
                 <div id="score" role="tabpanel" class="tab-pane active">
-                    {% for album in ordered_scores %}
-                        <h3><a href={{ album[1] }} target="_blank">{{ album[0] }}</a></h3>
+                    {% for album in by_score %}
+                        <h3>{{ album[0] }}</h3>
                     {% endfor %}
                 </div>
                 <div id="artist" role="tabpanel" class="tab-pane">
-                    {% for album in alphabetical_scores %}
-                        <h3><a href={{ album[1] }} target="_blank">{{ album[0] }}</a></h3>
-                    {% endfor %}
-                </div>
-                <div id="unscored" role="tabpanel" class="tab-pane">
-                    {% for album in unscored %}
-                        <h3><a href={{ album[1] }} target="_blank">{{ album[0] }}</a></h3>
+                    {% for album in by_artist %}
+                        <h3>{{ album[0] }}</h3>
                     {% endfor %}
                 </div>
             </div>
 
             <div class="bottompane">
                 <div class="footer">
-                    <button id="logout">log out</button>
+                    <button id="logout">back to login</button>
                     <script>
                         document.getElementById("logout").onclick=function(){
                             var URL="/"
