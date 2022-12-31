@@ -14,8 +14,8 @@ from results import get_average
 from insta_card import generate_card
 
 # scores for all scores tab
-from scores_classics import titles_classics
-from scores_2010s import titles_2010s
+from scores import titles_classics
+from scores import titles_2010s
 from scores_2020s import titles_2020s
 from results import all_by_score
 from results import all_by_artist
@@ -26,8 +26,8 @@ app = Flask(__name__)
 
 
 s = requests.session()
-clientID = ""
-clientSecret = ""
+clientID = "a0b8bc2c739b4e07af6080987ec92b42"
+clientSecret = "7d1619b987514719af200613ef88c663"
 
 
 @app.route("/")  # Home page and button for logging into Spotify

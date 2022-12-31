@@ -7,31 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 
-title_scores = {
-    "ichiko aoba - windswept adan": 9,
-    "haru nemuri - shunka ryougen": 7,
-    "tricot - 上出来": 7,
-    "xibalba - años en infierno": 6,
-    "floating points & pharoah sanders - promises": 9,
-    "denzel curry - melt my eyez see your future": 8,
-    "cordae - from a birds eye view": 6,
-    "future - i never liked you": 5,
-    "jane remover - frailty": 7,
-    "blu & exile & blu & exile - miles": 9,
-    "danger mouse & black thought - cheat codes": 8,
-    "ethel cain - preacher’s daughter": 6,
-    "nas - king's disease ii": 8,
-    "death's dynamic shroud - faith in persona": 8,
-    "chat pile - god's country": 8,
-    # King Gizzard & The Lizard Wizard
-    "king gizzard & the lizard wizard - k.g.": 6,
-    "king gizzard & the lizard wizard - l.w.": 7,
-    "king gizzard & the lizard wizard - butterfly 3000": 5,
-    "king gizzard & the lizard wizard - omnium gatherum": 6,
-    "king gizzard & the lizard wizard - ice, death, planets, lungs, mushrooms and lava": 7,
-    "king gizzard & the lizard wizard - laminated denim": 8,
-    "king gizzard & the lizard wizard - changes": 7,
-}
+title_scores = {}
 file_path = "scores_2020s.py"
 
 

@@ -43,7 +43,7 @@ def all_by_score(albums):
 
 def all_by_artist(albums):
     """Sort all albums by artist."""
-    temp = sorted(albums.items(), key=lambda x: (x[0], -x[1]))
+    temp = sorted(albums.items(), key=lambda x: (x[0].split(' - ')[0], -x[1], x[0].split(' - ')[1]))
     output = []
     for i in temp:
         output.append([str(i[1]) + '/10: ' + i[0]])
